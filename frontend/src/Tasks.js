@@ -8,6 +8,9 @@ import initialTasks from './InitialTasks';
 
 function Tasks() {
   const [tasks, setTasks] = useState(initialTasks);
+  const [filter, setFilter] = useState("incomplete");
+
+
 
   const TODO_BASE_URL = 'http://localhost:3000/todos';
 
@@ -83,7 +86,7 @@ function Tasks() {
   return (
     <>
       <div className="Tasks">
-        <h1>Tasks</h1>
+        <h1>Tasks {filter}</h1>
         <table>
           <thead>
             <tr>
@@ -95,7 +98,16 @@ function Tasks() {
           </thead>
 
           <tbody>
-            {tasks.map((todo) => {
+            {tasks.filter((task => {
+              if (filter === 'all') {
+                return true;
+              }
+
+              if (filter === 'complete') {
+                return task.completed;
+              }
+              return task.completed === false;
+            })).map((todo) => {
               return <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} setTodoCompleted={setTodoCompleted} />
             })}
           </tbody>
@@ -104,6 +116,12 @@ function Tasks() {
 
       <div>
         <TodoForm addTodo={addTodo} />
+      </div>
+
+      <div>
+        <button className='btn btn-info task-filter-button' onClick={() => setFilter('all')}>show all</button>
+        <button className='btn btn-warning task-filter-button' onClick={() => setFilter('incomplete')}>show incomplete</button>
+        <button className='btn btn-success task-filter-button' onClick={() => setFilter('complete')}>show complete</button>
       </div>
     </>
   );

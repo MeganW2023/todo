@@ -13,15 +13,19 @@ function TodoForm(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Add a new task</h1>
 
-      <input
-        type="text"
-        ref={inputRef}
-        placeholder="What needs to be done?"
-      />
+      <div class="input-group">
+        <div class="input-group-text">Add a new task</div>
 
-      <button type="submit">Add</button>
+        <input
+          type="text"
+          className='form-control'
+          ref={inputRef}
+          placeholder="What needs to be done?"
+        />
+
+        <button className='btn btn-primary' type="submit">Add</button>
+      </div>
     </form>
   );
 }

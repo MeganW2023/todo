@@ -1,6 +1,6 @@
 import './Todo.css';
 
-function translateCompleted(complete) { 
+function translateCompleted(complete) {
   if (complete)
     return "Yes";
 
@@ -13,10 +13,10 @@ function Todo(props) {
 
   return (
     <tr>
-        <td>{todo.id}</td>
-        <td>{todo.title}</td>
-        <td><a href="#todo" onClick={(e) => { setTodoCompleted(todo)}}>{translateCompleted(todo.completed)}</a></td>  
-        <td><button onClick={() => deleteTodo(todo.id)}>Delete</button></td>
+      <td>{todo.id}</td>
+      <td><span style={{ fontWeight: 'bold' }}>{todo.title}</span></td>
+      <td><a href="#todo" onClick={(e) => { setTodoCompleted(todo) }}>{translateCompleted(todo.completed)}</a></td>
+      <td><button className='btn btn-danger' onClick={() => deleteTodo(todo.id)}>Delete</button></td>
     </tr>
   );
 }
